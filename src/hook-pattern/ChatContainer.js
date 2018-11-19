@@ -1,9 +1,9 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const HookChatContainer = () => {
-  const [nameField, setNameField] = useState('');
-  const [messageField, setMessageField] = useState('');
+  const [nameField, setNameField] = useState('Name');
+  const [messageField, setMessageField] = useState('Message');
   const [chat, setChat] = useState([]);
 
   const renderMessage = () => {
@@ -16,6 +16,18 @@ const HookChatContainer = () => {
       setChat([...chat, message]);
   };
 
+  useEffect(() => {
+      document.title = messageField;
+
+      return function goodBye() {
+          console.log('Unmounting HOOK CHAT');
+      };
+  });
+
+  useEffect(() => {
+      console.log('CHAT variable has changed!');
+  }, [chat]);
+
   return (
     <div className="chat-container">
       <div className="form">
@@ -23,6 +35,7 @@ const HookChatContainer = () => {
           type="text"
           name="name"
           placeholder="Nickname"
+          defaultValue = { nameField }
           onChange={event => {
             setNameField(event.target.value);
           }}
@@ -31,6 +44,7 @@ const HookChatContainer = () => {
           type="text"
           name="message"
           placeholder="Type something witty"
+          defaultValue = { messageField }
           onChange={event => {
             setMessageField(event.target.value);
           }}

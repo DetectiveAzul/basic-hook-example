@@ -14,6 +14,24 @@ class ChatContainer extends Component {
         this.addMessage = this.addMessage.bind(this);
     }
 
+    componentDidMount() {
+        document.title = this.state.messageField;
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        //This changes after every update (keyUp events)
+        document.title = this.state.messageField;
+
+        //This will happen only after changing the CHAT state variable
+        if (prevState.chat.length !== this.state.chat.length) {
+            console.log('CHAT variable has changed!');
+          }
+    }
+
+    componentWillUnmount() {
+        console.log('Unmounting CLASSIC CHAT!');
+    }
+
     nameKeyUp(event) {
         this.setState({
             nameField: event.target.value
@@ -46,12 +64,14 @@ class ChatContainer extends Component {
                         type="text" 
                         name="name" 
                         placeholder="Nickname" 
+                        defaultValue={this.state.nameField}
                         onChange={this.nameKeyUp}          
                     />
                     <input 
                         type="text" 
                         name="message" 
                         placeholder="Type something witty" 
+                        defaultValue={this.state.messageField}
                         onChange={this.messageKeyUp}
                     />
                     <button onClick={this.addMessage}>Send Message!</button>
