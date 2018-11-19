@@ -14,10 +14,12 @@ class ChatContainer extends Component {
         this.addMessage = this.addMessage.bind(this);
     }
 
+    //This triggers at START
     componentDidMount() {
         document.title = this.state.messageField;
     }
 
+    //Trigger after every update (but different effects)
     componentDidUpdate(prevProps, prevState) {
         //This changes after every update (keyUp events)
         document.title = this.state.messageField;
@@ -28,10 +30,13 @@ class ChatContainer extends Component {
           }
     }
 
+    //When unmounting the component
     componentWillUnmount() {
         console.log('Unmounting CLASSIC CHAT!');
     }
 
+
+    //EVENTS Changing states
     nameKeyUp(event) {
         this.setState({
             nameField: event.target.value
@@ -56,6 +61,8 @@ class ChatContainer extends Component {
         });
     };
 
+
+    //Rendering
     render() {
         return(
             <div className="chat-container">

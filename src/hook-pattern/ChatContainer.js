@@ -2,11 +2,14 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 
 const HookChatContainer = () => {
+
+    //This start tbe state and set the function to change it
   const [nameField, setNameField] = useState('Name');
   const [messageField, setMessageField] = useState('Message');
   const [chat, setChat] = useState([]);
 
-  const renderMessage = () => {
+  //Bit of a custom hook
+  const useMessageEffect = () => {
     const message =
       <p key={chat.length + 1}>
         <strong>{nameField}: </strong>
@@ -16,6 +19,7 @@ const HookChatContainer = () => {
       setChat([...chat, message]);
   };
 
+  //This updates at Start, at End, and after every update
   useEffect(() => {
       document.title = messageField;
 
@@ -24,10 +28,12 @@ const HookChatContainer = () => {
       };
   });
 
+  //This will only trigger when CHAT is created or changed
   useEffect(() => {
       console.log('CHAT variable has changed!');
   }, [chat]);
 
+  //Rendering
   return (
     <div className="chat-container">
       <div className="form">
@@ -49,7 +55,7 @@ const HookChatContainer = () => {
             setMessageField(event.target.value);
           }}
         />
-        <button onClick={renderMessage}>Send Message!</button>
+        <button onClick={useMessageEffect}>Send Message!</button>
       </div>
       <div className="chat-messages">{chat}</div>
     </div>
