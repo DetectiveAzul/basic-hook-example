@@ -22,16 +22,16 @@ const HookChatContainer = () => {
   //This updates at Start, at End, and after every update
   useEffect(() => {
       document.title = messageField;
-
-      return function goodBye() {
-          console.log('Unmounting HOOK CHAT');
+      // TODO
+      return () => {
+        console.log('Unmounting HOOKS CHAT!');
       };
   });
 
   //This will only trigger when CHAT is created or changed
-  useEffect(() => {
-      console.log('CHAT variable has changed!');
-  }, [chat]);
+    useEffect(() => {
+        console.log('CHAT variable has changed!');
+    }, [chat]);
 
   //Rendering
   return (
