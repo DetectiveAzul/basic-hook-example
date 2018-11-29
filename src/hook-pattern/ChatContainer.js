@@ -39,6 +39,7 @@ const HookChatContainer = () => {
   //Rendering
   return (
     <div className="chat-container">
+      <h1>Hook Pattern</h1>
       <div className="form">
         <input
           type="text"

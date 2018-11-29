@@ -65,6 +65,7 @@ class ChatContainer extends Component {
   render() {
     return (
       <div className="chat-container">
+        <h1>Classic Pattern</h1>
         <div className="form">
           <input
             type="text"
