@@ -14,9 +14,37 @@ class ChatContainer extends Component {
     this.addMessage = this.addMessage.bind(this);
   }
 
+    //EVENTS Changing states
+    nameKeyUp(event) {
+      this.setState({
+        nameField: event.target.value
+      });
+    }
+  
+    messageKeyUp(event) {
+      this.setState({
+        messageField: event.target.value
+      });
+    }
+  
+    addMessage(event) {
+      const chatMessage = (
+        <p key={this.state.chat.length + 1}>
+          <strong>{this.state.nameField}: </strong>
+          {this.state.messageField}
+        </p>
+      );
+  
+      this.setState({
+        chat: [...this.state.chat, chatMessage]
+      });
+    }
+  
+
   //This triggers at START
   componentDidMount() {
     document.title = this.state.messageField;
+    console.log('Component DID MOUNT ONCE')
   }
 
   //Trigger after every update (but different effects)
@@ -33,32 +61,6 @@ class ChatContainer extends Component {
   //When unmounting the component
   componentWillUnmount() {
     console.log('Unmounting CLASSIC CHAT!');
-  }
-
-  //EVENTS Changing states
-  nameKeyUp(event) {
-    this.setState({
-      nameField: event.target.value
-    });
-  }
-
-  messageKeyUp(event) {
-    this.setState({
-      messageField: event.target.value
-    });
-  }
-
-  addMessage(event) {
-    const chatMessage = (
-      <p key={this.state.chat.length + 1}>
-        <strong>{this.state.nameField}: </strong>
-        {this.state.messageField}
-      </p>
-    );
-
-    this.setState({
-      chat: [...this.state.chat, chatMessage]
-    });
   }
 
   //Rendering

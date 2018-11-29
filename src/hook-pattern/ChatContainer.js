@@ -23,9 +23,9 @@ const HookChatContainer = () => {
   useEffect(() => {
     document.title = messageField;
     // TODO
-    // return () => {
-    //   console.log('Unmounting HOOKS CHAT!');
-    // };
+    return () => {
+      console.log('Unmounting HOOKS CHAT!');
+    };
   });
 
   //This will only trigger when CHAT is created or changed
@@ -34,6 +34,13 @@ const HookChatContainer = () => {
       console.log('CHAT variable has changed!');
     },
     [chat]
+  );
+
+  useEffect(
+    () => {
+      console.log('COMPONENT DID MOUNT (ONCE)')
+    },
+    [ ]
   );
 
   //Rendering
